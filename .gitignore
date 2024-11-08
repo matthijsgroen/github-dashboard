@@ -58,3 +58,8 @@ lerna-debug.log*
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Vite
+*.timestamp-*.mjs
+vite.config.ts.timestamp-*
+.vite/
