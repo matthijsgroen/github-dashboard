@@ -2,6 +2,7 @@ type DashboardHeaderProps = {
   owner: {
     login: string
     avatar_url: string
+    html_url: string
   }
   totalRepos: number
   totalStars: number
@@ -22,9 +23,14 @@ export const DashboardHeader = ({
             className="h-16 w-16 rounded-full ring-2 ring-gray-200 dark:ring-gray-700"
           />
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            <a
+              href={owner.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
               {owner.login}
-            </h1>
+            </a>
             <div className="flex gap-4 mt-1 text-gray-600 dark:text-gray-300">
               <span className="flex items-center gap-1">
                 <span className="font-medium">{totalRepos}</span> repositories

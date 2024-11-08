@@ -11,4 +11,4 @@ export const router = createHashRouter([
     path: '/:username',
     element: <Dashboard />,
   },
-]) 
+])

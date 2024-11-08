@@ -50,4 +50,4 @@ export const RepositoryFilters = ({
       </div>
     </div>
   </div>
-) 
+)

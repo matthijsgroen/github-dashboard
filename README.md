@@ -32,8 +32,8 @@ A modern React application that allows users to search for GitHub profiles and e
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/github-user-dashboard.git
-cd github-user-dashboard
+git clone https://github.com/matthijsgroen/github-dashboard.git
+cd github-dashboard
 ```
 
 2. Install dependencies
@@ -56,25 +56,6 @@ The application will be running at `http://localhost:3000`
 - [React Router v6](https://reactrouter.com/) - Declarative routing for React
 - [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework
 - [GitHub REST API](https://docs.github.com/en/rest) - GitHub's REST API
-
-## 📁 Project Structure
-
-```
-src/
-├── components/
-│   ├── GitHubSearch.tsx   # Search component with user profile display
-│   └── Dashboard.tsx      # Repository dashboard component
-├── App.tsx               # Main application component with routing
-├── main.tsx             # Application entry point
-└── index.css            # Global styles and Tailwind directives
-```
-
-## 🎯 Usage
-
-1. Enter a GitHub username in the search field
-2. Click "Search" to view the user's basic information
-3. Click "View Dashboard" to explore the user's repositories
-4. Use "Back to Search" to return to the search page
 
 ## 🔧 Available Scripts
 
@@ -103,12 +84,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👤 Author
-
-Your Name
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
-
 ## 🙏 Acknowledgments
 
 - [GitHub API Documentation](https://docs.github.com/en/rest)
@@ -117,4 +92,4 @@ Your Name
 
 ## 🐛 Found a Bug?
 
-If you find a bug, please open an issue [here](https://github.com/yourusername/github-user-dashboard/issues) with a detailed description.
+If you find a bug, please open an issue [here](https://github.com/matthijsgroen/github-dashboard/issues) with a detailed description.

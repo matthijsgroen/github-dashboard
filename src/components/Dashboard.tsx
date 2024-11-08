@@ -48,7 +48,10 @@ const Dashboard: FC = () => {
         <div className="text-red-600 dark:text-red-400">
           {error instanceof Error ? error.message : 'An error occurred'}
         </div>
-        <Link to="/" className="text-blue-600 hover:underline dark:text-blue-400">
+        <Link
+          to="/"
+          className="text-blue-600 hover:underline dark:text-blue-400"
+        >
           Back to Search
         </Link>
       </div>
@@ -66,10 +69,6 @@ const Dashboard: FC = () => {
       )}
       <div className="container mx-auto px-4 py-8">
         <div className="space-y-6">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            GitHub Repositories
-          </h1>
-
           <RepositoryFilters
             includeForks={includeForks}
             setIncludeForks={setIncludeForks}
@@ -81,7 +80,7 @@ const Dashboard: FC = () => {
             totalCount={repos.length}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {filteredRepos.map((repo) => (
               <RepositoryCard key={repo.id} repo={repo} />
             ))}
