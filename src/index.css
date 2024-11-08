@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    @apply antialiased text-gray-800;
+  }
+
+  /* Remove default focus outline and add custom one */
+  :focus {
+    @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+  }
+
+  /* Remove ring from mouse users, keep for keyboard */
+  :focus:not(:focus-visible) {
+    @apply ring-0 ring-offset-0;
+  }
+} 
