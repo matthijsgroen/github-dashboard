@@ -5,6 +5,7 @@ import { githubService } from '../services/github'
 
 import { useQuery } from '@tanstack/react-query'
 import { DashboardHeader } from './DashboardHeader'
+import { RepositoryFilters } from './RepositoryFilters'
 
 const Dashboard: FC = () => {
   const { username = '' } = useParams<{ username: string }>()
@@ -21,11 +22,13 @@ const Dashboard: FC = () => {
     enabled: !!username,
   })
 
-  const filteredRepos = repos.filter((repo) => {
-    if (!includeForks && repo.fork) return false
-    if (showOnlyWithIssues && repo.open_issues === 0) return false
-    return true
-  })
+  const filteredRepos = repos
+    .filter((repo) => {
+      if (!includeForks && repo.fork) return false
+      if (showOnlyWithIssues && repo.open_issues === 0) return false
+      return true
+    })
+    .sort((a, b) => b.stargazers_count - a.stargazers_count)
 
   const totalStars =
     repos?.reduce((sum, repo) => sum + repo.stargazers_count, 0) ?? 0
@@ -33,19 +36,19 @@ const Dashboard: FC = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-xl">Loading...</div>
+      <div className="flex justify-center items-center min-h-screen dark:bg-gray-900">
+        <div className="text-xl dark:text-white">Loading...</div>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div className="max-w-4xl mx-auto mt-8 p-4">
-        <div className="text-red-600">
+      <div className="max-w-4xl mx-auto mt-8 p-4 dark:bg-gray-900">
+        <div className="text-red-600 dark:text-red-400">
           {error instanceof Error ? error.message : 'An error occurred'}
         </div>
-        <Link to="/" className="text-blue-600 hover:underline">
+        <Link to="/" className="text-blue-600 hover:underline dark:text-blue-400">
           Back to Search
         </Link>
       </div>
@@ -53,7 +56,7 @@ const Dashboard: FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {repos?.[0]?.owner && (
         <DashboardHeader
           owner={repos[0].owner}
@@ -63,46 +66,20 @@ const Dashboard: FC = () => {
       )}
       <div className="container mx-auto px-4 py-8">
         <div className="space-y-6">
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
             GitHub Repositories
           </h1>
 
-          <div className="bg-white rounded-lg shadow p-4 space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    className="sr-only peer"
-                    checked={includeForks}
-                    onChange={(e) => setIncludeForks(e.target.checked)}
-                  />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                  <span className="ml-3 text-sm font-medium text-gray-900">
-                    Show Forks
-                  </span>
-                </label>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    className="sr-only peer"
-                    checked={showOnlyWithIssues}
-                    onChange={(e) => setShowOnlyWithIssues(e.target.checked)}
-                  />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                  <span className="ml-3 text-sm font-medium text-gray-900">
-                    Only With Issues
-                  </span>
-                </label>
-                <span className="text-sm text-gray-500">
-                  ({forkCount} forks, {totalStars} stars)
-                </span>
-              </div>
-              <div className="text-sm text-gray-500">
-                Showing {filteredRepos.length} of {repos.length} repositories
-              </div>
-            </div>
-          </div>
+          <RepositoryFilters
+            includeForks={includeForks}
+            setIncludeForks={setIncludeForks}
+            showOnlyWithIssues={showOnlyWithIssues}
+            setShowOnlyWithIssues={setShowOnlyWithIssues}
+            forkCount={forkCount}
+            totalStars={totalStars}
+            filteredCount={filteredRepos.length}
+            totalCount={repos.length}
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredRepos.map((repo) => (

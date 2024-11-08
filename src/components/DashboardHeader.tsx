@@ -12,18 +12,20 @@ export const DashboardHeader = ({
   totalRepos,
   totalStars,
 }: DashboardHeaderProps) => (
-  <header className="bg-white border-b border-gray-200 shadow-sm">
+  <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
     <div className="container mx-auto px-4 py-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <img
             src={owner.avatar_url}
             alt={`${owner.login}'s avatar`}
-            className="h-16 w-16 rounded-full"
+            className="h-16 w-16 rounded-full ring-2 ring-gray-200 dark:ring-gray-700"
           />
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{owner.login}</h1>
-            <div className="flex gap-4 mt-1 text-gray-600">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              {owner.login}
+            </h1>
+            <div className="flex gap-4 mt-1 text-gray-600 dark:text-gray-300">
               <span className="flex items-center gap-1">
                 <span className="font-medium">{totalRepos}</span> repositories
               </span>
