@@ -28,4 +28,4 @@ root.render(
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </React.StrictMode>
-) 
+)

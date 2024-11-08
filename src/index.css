@@ -6,7 +6,7 @@
   html {
     -webkit-tap-highlight-color: transparent;
   }
-  
+
   body {
     @apply antialiased text-gray-800;
   }
@@ -20,4 +20,4 @@
   :focus:not(:focus-visible) {
     @apply ring-0 ring-offset-0;
   }
-} 
+}
